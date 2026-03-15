@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skinome — Marketing Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #eeece9;
+      font-family: 'Space Grotesk', sans-serif;
+      color: #3d3935;
+      min-height: 100vh;
+    }
+
+    /* HEADER */
+    .header {
+      padding: 64px 64px 0;
+      max-width: 1200px;
+    }
+
+    .wordmark {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #746c64;
+      margin-bottom: 40px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .wordmark::after {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: #d5d0c9;
+    }
+
+    .hero-title {
+      font-size: 52px;
+      font-weight: 700;
+      color: #0d0d0d;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
+
+    .hero-sub {
+      font-family: 'Barlow', sans-serif;
+      font-size: 17px;
+      color: #746c64;
+      line-height: 1.6;
+      max-width: 560px;
+      margin-bottom: 64px;
+    }
+
+    /* MAIN GRID */
+    .modules {
+      padding: 0 64px 80px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    /* Large card (spans 2 cols) */
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+      position: relative;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.10);
+    }
+
+    .card.wide {
+      grid-column: 1 / -1;
+      flex-direction: row;
+    }
+
+    /* Card visual */
+    .card-visual {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .card:not(.wide) .card-visual {
+      height: 220px;
+    }
+
+    .card.wide .card-visual {
+      width: 380px;
+      min-height: 280px;
+    }
+
+    /* Card body */
+    .card-body {
+      padding: 32px 36px 36px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .card.wide .card-body {
+      justify-content: center;
+    }
+
+    .card-tag {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .card-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: #0d0d0d;
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
+
+    .card-desc {
+      font-family: 'Barlow', sans-serif;
+      font-size: 14px;
+      color: #746c64;
+      line-height: 1.65;
+      flex: 1;
+      margin-bottom: 24px;
+    }
+
+    .card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .card-link::after {
+      content: '→';
+      font-size: 14px;
+    }
+
+    .card-count {
+      position: absolute;
+      bottom: 16px;
+      right: 20px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0.5;
+    }
+
+    /* ─── VISUAL DESIGNS ─── */
+
+    /* 1. 50 Disruptors — dark, stacked cards illusion */
+    .vis-disruptors {
+      background: #0d0d0d;
+    }
+    .vis-disruptors .stack {
+      position: relative;
+      width: 200px;
+      height: 140px;
+    }
+    .vis-disruptors .s-card {
+      position: absolute;
+      width: 180px;
+      height: 120px;
+      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .vis-disruptors .s-card:nth-child(1) { background: #1a1a1a; top: 16px; left: 16px; }
+    .vis-disruptors .s-card:nth-child(2) { background: #222; top: 8px; left: 8px; }
+    .vis-disruptors .s-card:nth-child(3) { background: #2d2d2d; top: 0; left: 0; }
+    .vis-disruptors .s-text {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      color: rgba(255,255,255,0.9);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .vis-disruptors .s-num {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      font-size: 32px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.12);
+      line-height: 1;
+    }
+
+    /* 2. Favourite Disruptors — cream, gold accent */
+    .vis-favorites {
+      background: #f6f3f0;
+    }
+    .vis-favorites .fav-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 52px);
+      gap: 8px;
+    }
+    .vis-favorites .fav-cell {
+      width: 52px;
+      height: 52px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.7);
+    }
+    .fav-c1 { background: #1a1a1a; }
+    .fav-c2 { background: #fffdd9; color: #3d3935 !important; }
+    .fav-c3 { background: #3d3935; }
+    .fav-c4 { background: #0d0d0d; }
+    .fav-c5 { background: #8b5e3c; }
+    .fav-c6 { background: #e3f0f5; color: #3d3935 !important; }
+    .fav-c7 { background: #1a2744; }
+    .fav-c8 { background: #e8d5cf; color: #3d3935 !important; }
+    .fav-star {
+      position: absolute;
+      top: 18px;
+      right: 20px;
+      font-size: 20px;
+      opacity: 0.3;
+    }
+
+    /* 3. Product Campaigns — colorful product dots */
+    .vis-produkter {
+      background: #3d3935;
+    }
+    .vis-produkter .prod-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      padding: 4px;
+    }
+    .vis-produkter .prod-dot {
+      height: 48px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .pd1 { background: #1a1a1a; color: #d4a855; }
+    .pd2 { background: #0d2a1a; color: #5db870; }
+    .pd3 { background: #1a1a2e; color: #9999cc; }
+    .pd4 { background: #2a1a2e; color: #cc88cc; }
+    .pd5 { background: #2a1a00; color: #ffaa33; }
+    .pd6 { background: #1a2a00; color: #88cc44; }
+
+    /* 4. Holland Strategi — map/geography feel */
+    .vis-holland {
+      background: #1c3a5c;
+    }
+    .vis-holland .map-shape {
+      position: relative;
+      width: 120px;
+      height: 130px;
+    }
+    .vis-holland .map-body {
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0.12);
+      border-radius: 30% 60% 50% 40% / 40% 30% 60% 50%;
+    }
+    .vis-holland .map-dot {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: #ffaa33;
+      border-radius: 50%;
+      top: 38%;
+      left: 42%;
+      box-shadow: 0 0 12px #ffaa33;
+    }
+    .vis-holland .map-ring {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      border: 2px solid rgba(255,170,51,0.4);
+      border-radius: 50%;
+      top: calc(38% - 7px);
+      left: calc(42% - 7px);
+    }
+    .vis-holland .map-label {
+      position: absolute;
+      bottom: -24px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      color: rgba(255,255,255,0.5);
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .vis-holland .flag-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(to right, #c8102e 33%, #fff 33% 66%, #003087 66%);
+      opacity: 0.4;
+    }
+
+    /* 5. UX Rapport — browser/screen feel */
+    .vis-ux {
+      background: #f6f3f0;
+    }
+    .vis-ux .browser {
+      width: 220px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+      overflow: hidden;
+    }
+    .vis-ux .browser-bar {
+      height: 28px;
+      background: #f0ede8;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0 10px;
+    }
+    .vis-ux .dot-r { width: 8px; height: 8px; border-radius: 50%; background: #ff6b6b; }
+    .vis-ux .dot-y { width: 8px; height: 8px; border-radius: 50%; background: #ffd93d; }
+    .vis-ux .dot-g { width: 8px; height: 8px; border-radius: 50%; background: #6bcb77; }
+    .vis-ux .browser-content {
+      padding: 12px;
+    }
+    .vis-ux .bc-line {
+      height: 7px;
+      border-radius: 4px;
+      background: #eeece9;
+      margin-bottom: 7px;
+    }
+    .vis-ux .bc-line.short { width: 55%; }
+    .vis-ux .bc-line.medium { width: 80%; }
+    .vis-ux .bc-line.full { width: 100%; }
+    .vis-ux .bc-highlight {
+      height: 28px;
+      border-radius: 4px;
+      background: #3d3935;
+      margin-bottom: 7px;
+      display: flex;
+      align-items: center;
+      padding: 0 8px;
+    }
+    .vis-ux .bc-highlight span {
+      width: 50%;
+      height: 5px;
+      border-radius: 3px;
+      background: rgba(255,255,255,0.3);
+    }
+
+    /* ─── FOOTER ─── */
+    .site-footer {
+      padding: 32px 64px 48px;
+      border-top: 1px solid #d5d0c9;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-left {
+      font-size: 12px;
+      color: #746c64;
+      line-height: 1.6;
+    }
+
+    .footer-right {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #d5d0c9;
+    }
+
+    /* Color themes for tags + links */
+    .tag-campaigns { color: #746c64; }
+    .tag-favorites  { color: #8b6914; }
+    .tag-produkter  { color: #4a7c59; }
+    .tag-holland    { color: #1c5c9c; }
+    .tag-ux         { color: #7c4a7c; }
+
+    .link-campaigns { color: #3d3935; }
+    .link-favorites { color: #8b6914; }
+    .link-produkter { color: #2d6644; }
+    .link-holland   { color: #1c5c9c; }
+    .link-ux        { color: #6a3a8c; }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="wordmark">Skinome · Marketing Hub</div>
+    <div class="hero-title">Allt på ett ställe.</div>
+    <div class="hero-sub">En samlad vy över Skinomes marknadsföringsmoduler — kampanjer, produktannonser, marknadsanalys och strategi. Klicka på en modul för att öppna den.</div>
+  </div>
+
+  <div class="modules">
+
+    <!-- 1. 50 Disruptors — WIDE -->
+    <a href="https://snyggon.github.io/skinome-campaigns/index.html" class="card wide" target="_blank">
+      <div class="card-visual vis-disruptors">
+        <div class="stack">
+          <div class="s-card"></div>
+          <div class="s-card"></div>
+          <div class="s-card">
+            <div class="s-text">Skinome</div>
+            <div class="s-num">50</div>
+          </div>
+        </div>
+        <div class="card-count" style="color:rgba(255,255,255,0.3)">50 annonser</div>
+      </div>
+      <div class="card-body">
+        <div class="card-tag tag-campaigns">Kampanjbibliotek</div>
+        <div class="card-title">50 Disruptors</div>
+        <div class="card-desc">
+          50 Instagram-annonser i tre serier: The Label Campaign (01–10) som mjukt men säkert utbildar om ingredienser, Confrontational (11–30) med sex psykologiska ramar, och Industry Tease (31–50) i parodiformat — gravstenar, kryptiska varningsanslag, EU-regulatoriska parodi-dokument och falska ursäktsbrev.
+        </div>
+        <div class="card-link link-campaigns">Öppna biblioteket</div>
+      </div>
+    </a>
+
+    <!-- 2. Favourite Disruptors -->
+    <a href="https://snyggon.github.io/skinome-campaigns/favorites/index.html" class="card" target="_blank">
+      <div class="card-visual vis-favorites">
+        <div class="fav-grid">
+          <div class="fav-cell fav-c1">17</div>
+          <div class="fav-cell fav-c2">26</div>
+          <div class="fav-cell fav-c3">28</div>
+          <div class="fav-cell fav-c4">v3</div>
+          <div class="fav-cell fav-c5">v7</div>
+          <div class="fav-cell fav-c6">v9</div>
+          <div class="fav-cell fav-c7">v2</div>
+          <div class="fav-cell fav-c8">v5</div>
+          <div class="fav-cell fav-c3">v8</div>
+        </div>
+        <div class="fav-star">★</div>
+        <div class="card-count" style="color:#d5d0c9">30 varianter</div>
+      </div>
+      <div class="card-body">
+        <div class="card-tag tag-favorites">Favoriter · Layoutvarianter</div>
+        <div class="card-title">Favourite Disruptors</div>
+        <div class="card-desc">
+          30 typografiska och data-visualiserade varianter av de tre starkaste koncepten — kampanj 17, 26 och 28. Shelf-life bars, giant numbers, scatter plots, academic CVs, manifeston och mer.
+        </div>
+        <div class="card-link link-favorites">Öppna favoriter</div>
+      </div>
+    </a>
+
+    <!-- 3. Product Campaigns -->
+    <a href="https://snyggon.github.io/skinome-campaigns/produkter/" class="card" target="_blank">
+      <div class="card-visual vis-produkter">
+        <div class="prod-grid">
+          <div class="prod-dot pd1">Ret</div>
+          <div class="prod-dot pd2">Pro</div>
+          <div class="prod-dot pd3">Rich</div>
+          <div class="prod-dot pd4">Aze</div>
+          <div class="prod-dot pd5">S50</div>
+          <div class="prod-dot pd6">S30</div>
+        </div>
+        <div class="card-count" style="color:rgba(255,255,255,0.3)">60 annonser</div>
+      </div>
+      <div class="card-body">
+        <div class="card-tag tag-produkter">Produktkampanjer</div>
+        <div class="card-title">Product Campaigns</div>
+        <div class="card-desc">
+          60 Instagram-annonser för Skinomes sex bästsäljare — Retinal Concentrate, Probiotic Concentrate, Rich Emulsion, Azeretinal Concentrate och Sun Emulsion SPF 50+ / SPF 30+. Nya vinklar, vetenskapstungat innehåll.
+        </div>
+        <div class="card-link link-produkter">Öppna produktkampanjer</div>
+      </div>
+    </a>
+
+    <!-- 4. Holland Strategi — WIDE -->
+    <a href="https://snyggon.github.io/skinome-holland" class="card wide" target="_blank">
+      <div class="card-visual vis-holland" style="flex-direction:column; gap:0;">
+        <div class="map-shape" style="position:relative; width:120px; height:130px; margin-top:16px;">
+          <div class="map-body"></div>
+          <div class="map-dot"></div>
+          <div class="map-ring"></div>
+          <div class="map-label">Amsterdam</div>
+        </div>
+        <div class="flag-bar" style="position:relative; width:100%; height:4px; background:linear-gradient(to right,#c8102e 33%,#fff 33% 66%,#003087 66%); margin-top:32px; opacity:0.5;"></div>
+        <div class="card-count" style="color:rgba(255,255,255,0.3)">Marknadsstrategi</div>
+      </div>
+      <div class="card-body">
+        <div class="card-tag tag-holland">Internationell expansion</div>
+        <div class="card-title">Holland Strategi</div>
+        <div class="card-desc">
+          Skinomes expansionsstrategi för den holländska marknaden — marknadsanalys, positionering, kanalstrategi och konkreta nästa steg för att ta Skinome till en av Europas mest hudvårdsintresserade marknader.
+        </div>
+        <div class="card-link link-holland">Öppna strategidokument</div>
+      </div>
+    </a>
+
+    <!-- 5. UX Rapport — WIDE -->
+    <a href="https://snyggon.github.io/skinome-ux-rapport/" class="card wide" target="_blank">
+      <div class="card-visual vis-ux">
+        <div class="browser">
+          <div class="browser-bar">
+            <div class="dot-r"></div>
+            <div class="dot-y"></div>
+            <div class="dot-g"></div>
+          </div>
+          <div class="browser-content">
+            <div class="bc-line short"></div>
+            <div class="bc-highlight"><span></span></div>
+            <div class="bc-line full"></div>
+            <div class="bc-line medium"></div>
+            <div class="bc-line short"></div>
+            <div class="bc-line full"></div>
+            <div class="bc-line medium"></div>
+          </div>
+        </div>
+        <div class="card-count" style="color:#d5d0c9">UX · Analys</div>
+      </div>
+      <div class="card-body">
+        <div class="card-tag tag-ux">Webbanalys · Användarupplevelse</div>
+        <div class="card-title">Användarrapport för Skinome.com</div>
+        <div class="card-desc">
+          En djupgående UX-analys av Skinome.com — hur besökare rör sig på sajten, var konverteringen bryts, och konkreta förbättringsförslag för att öka andelen besökare som faktiskt köper.
+        </div>
+        <div class="card-link link-ux">Öppna UX-rapporten</div>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="site-footer">
+    <div class="footer-left">
+      Skinome Marketing Hub · Internt material<br>
+      <span style="font-size:11px;">Uppdaterad mars 2026</span>
+    </div>
+    <div class="footer-right">Skinome</div>
+  </div>
+
+</body>
+</html>
